@@ -16,14 +16,14 @@
 
 package org.springframework.context.support;
 
-import java.io.IOException;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextException;
 import org.springframework.lang.Nullable;
+
+import java.io.IOException;
 
 /**
  * Base class for {@link org.springframework.context.ApplicationContext}
@@ -119,6 +119,8 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 */
 	@Override
 	protected final void refreshBeanFactory() throws BeansException {
+		//销毁旧Factory(如果有) 并构建新BeanFactory(实现类：DefaultListableBeanFactory)。
+		// 在刷新过程中，会通过loadBeanDefinitions()来完成Bean扫描、加载过程
 		if (hasBeanFactory()) {
 			destroyBeans();
 			closeBeanFactory();

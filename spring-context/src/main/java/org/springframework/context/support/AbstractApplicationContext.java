@@ -575,6 +575,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 			// Prepare this context for refreshing. 准备刷新
 			// 准备工作，例如记录事件，设置标志，检查环境变量等，并有留给子类扩展的位置，用来将属性加入到applicationContext中
+			//记录开始时间，激活状态。初始化占位符属性源，还有验证环境变量
 			prepareRefresh();
 
 			// Tell the subclass to refresh the internal bean factory.
@@ -669,6 +670,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 		// Validate that all properties marked as required are resolvable:
 		// see ConfigurablePropertyResolver#setRequiredProperties
+		//委托propertyResolver来验证环境属性
 		getEnvironment().validateRequiredProperties();
 
 		// Store pre-refresh ApplicationListeners...
